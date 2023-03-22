@@ -1,7 +1,16 @@
 package main
 
-import "github.com/EdsonGustavoTofolo/desafio-multithreading-golang/internal/usecase"
+import (
+	"errors"
+	"github.com/EdsonGustavoTofolo/desafio-multithreading-golang/internal/usecase"
+	"os"
+)
 
 func main() {
-	usecase.NewGetCep("89803250").Execute()
+	if len(os.Args) == 2 {
+		cep := os.Args[1]
+		usecase.NewGetCep(cep).Execute()
+	} else {
+		panic(errors.New("missing cep"))
+	}
 }
